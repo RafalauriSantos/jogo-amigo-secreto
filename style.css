@@ -1,0 +1,208 @@
+:root {
+  --color-primary: #1b1f3b;
+  --color-secondary: #2d325a;
+  --color-tertiary: #41466e;
+  --color-button: #00d1ff;
+  --color-button-hover: #00aacc;
+  --color-text: #e0e0e0;
+  --color-white: #ffffff;
+  --color-remove-btn: #555555;
+  --color-remove-btn-hover: #404040;
+  --color-gradient-start: #1b1f3b;
+  --color-gradient-end: #2d325a;
+}
+
+/* Estilos gerais */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  background: linear-gradient(135deg, var(--color-gradient-start), var(--color-gradient-end));
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Inter', sans-serif;
+  color: var(--color-text);
+}
+
+.main-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  max-width: 1200px;
+}
+
+/* Banner */
+.header-banner {
+  flex: 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 0 0;
+}
+
+.header-banner img {
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+/* Seção de entrada */
+.input-section {
+  flex: 60%;
+  background-color: var(--color-secondary);
+  border: 1px solid #000;
+  border-radius: 64px 64px 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  width: 100%;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* Títulos */
+.main-title {
+  font-size: 48px;
+  font-family: "Merriweather", serif;
+  font-weight: 900;
+  font-style: italic;
+  color: var(--color-white);
+  text-align: center;
+}
+
+.section-title {
+  font-family: "Inter", sans-serif;
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--color-button);
+  margin: 10px 0;
+  text-align: center;
+}
+
+/* Contêineres de entrada e botão */
+.input-wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  max-width: 600px;
+  margin-top: 20px;
+}
+
+.input-name {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid var(--color-tertiary);
+  border-radius: 25px 0 0 25px;
+  font-size: 16px;
+  color: var(--color-text);
+  background-color: var(--color-secondary);
+}
+
+.button-container {
+  width: 300px;
+  justify-content: center;
+}
+
+/* Estilos de entrada de texto */
+.input-title {
+  flex: 1;
+  padding: 10px 15px;
+  font-size: 16px;
+  border: 2px solid var(--color-tertiary);
+  border-right: none;
+  border-radius: 25px 0 0 25px;
+  font-family: "Merriweather", serif;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  background-color: var(--color-secondary);
+  color: var(--color-text);
+}
+
+/* Estilos de botão */
+button {
+  padding: 15px 30px;
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  border: 2px solid #000;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button-add {
+  background-color: var(--color-tertiary);
+  color: var(--color-text);
+  border-radius: 0 25px 25px 0;
+}
+
+.button-add:hover {
+  background-color: #50577a;
+}
+
+/* Listas */
+ul {
+  list-style-type: none;
+  color: var(--color-text);
+  font-family: "Inter", sans-serif;
+  font-size: 18px;
+  margin: 20px 0;
+}
+
+/* Estilo para os nomes dos amigos */
+.name-list li {
+  font-weight: bold;
+  margin-bottom: 10px;
+  border-bottom: 1px solid var(--color-tertiary);
+  padding-bottom: 5px;
+}
+
+/* Botão de sortear título */
+.button-draw {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 10px 40px;
+  color: var(--color-white);
+  background-color: var(--color-button);
+  font-size: 16px;
+}
+
+.button-draw img {
+  margin-right: 40px;
+}
+
+.button-draw:hover {
+  background-color: var(--color-button-hover);
+}
+
+/* Feedback */
+.feedback-success {
+  color: #00ff00;
+  margin-top: 10px;
+}
+
+.feedback-error {
+  color: #ff0000;
+  margin-top: 10px;
+}
+
+/* Botão de remoção */
+.remove-btn {
+  background-color: var(--color-remove-btn);
+  color: white;
+  border: none;
+  padding: 5px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-left: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.remove-btn:hover {
+  background-color: var(--color-remove-btn-hover);
+}
