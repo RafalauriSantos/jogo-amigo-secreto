@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", () => {
     const btnAdicionarAmigo = document.getElementById("addButton");
     const btnSortearAmigo = document.getElementById("drawButton");
     const inputAmigo = document.getElementById("inputName");
@@ -6,37 +6,37 @@ document.addEventListener("DOMContentLoaded", function () {
     const resultadoDiv = document.getElementById("result");
     const feedbackMessage = document.getElementById("feedbackMessage");
 
+    // Array para armazenar os nomes dos amigos
     let listaAmigos = JSON.parse(localStorage.getItem("listaAmigos")) || [];
 
-    function nomeValido(nome) {
-        const regex = /^[a-zA-Z\s]+$/;
-        return regex.test(nome);
-    }
+    // Função para validar o nome (apenas letras e espaços)
+    const nomeValido = (nome) => /^[a-zA-Z\s]+$/.test(nome);
 
-    function salvarNoLocalStorage() {
+    // Função para salvar lista no localStorage
+    const salvarNoLocalStorage = () => {
         localStorage.setItem("listaAmigos", JSON.stringify(listaAmigos));
-    }
+    };
 
-    function atualizarListaAmigos() {
+    // Função para atualizar a lista exibida na tela
+    const atualizarListaAmigos = () => {
         listaAmigosUl.innerHTML = '';
-        listaAmigos.forEach(function (amigo, index) {
+        listaAmigos.forEach((amigo, index) => {
             const li = document.createElement("li");
             li.textContent = amigo;
 
             const removeBtn = document.createElement("button");
             removeBtn.textContent = "Remover";
             removeBtn.className = "remove-btn";
-            removeBtn.addEventListener("click", function () {
-                removerAmigo(index);
-            });
+            removeBtn.addEventListener("click", () => removerAmigo(index));
 
             li.appendChild(removeBtn);
             listaAmigosUl.appendChild(li);
         });
         verificarBotaoSortear();
-    }
+    };
 
-    function adicionarAmigo(nomeAmigo) {
+    // Função para adicionar o nome à lista
+    const adicionarAmigo = (nomeAmigo) => {
         if (listaAmigos.includes(nomeAmigo)) {
             mostrarFeedback("Esse nome já foi adicionado!", "error");
             return;
@@ -47,48 +47,67 @@ document.addEventListener("DOMContentLoaded", function () {
         atualizarListaAmigos();
         inputAmigo.value = "";
         mostrarFeedback("Amigo adicionado com sucesso!", "success");
-    }
+    };
 
-    function removerAmigo(index) {
+    // Função para remover um amigo da lista
+    const removerAmigo = (index) => {
         listaAmigos.splice(index, 1);
         salvarNoLocalStorage();
         atualizarListaAmigos();
         mostrarFeedback("Amigo removido com sucesso!", "success");
-    }
+    };
 
-    function verificarBotaoSortear() {
+    // Função para verificar se o botão de sortear pode ser habilitado
+    const verificarBotaoSortear = () => {
         btnSortearAmigo.disabled = listaAmigos.length === 0;
-    }
+    };
 
-    function sortearAmigo() {
+    // Função para realizar o sorteio
+    const sortearAmigo = () => {
         const amigoSorteado = listaAmigos[Math.floor(Math.random() * listaAmigos.length)];
         resultadoDiv.textContent = `O amigo sorteado é: ${amigoSorteado}`;
-    }
+    };
 
-    function adicionarNomeAmigo() {
+    // Função para adicionar nome ao clicar no botão ou pressionar Enter
+    const adicionarNomeAmigo = () => {
         const nomeAmigo = inputAmigo.value.trim();
+        if (!nomeAmigo) {
+            alert("Digite um nome");
+            speak("Digite um nome");
+            return;
+        }
         if (!nomeValido(nomeAmigo)) {
             mostrarFeedback("Por favor, insira um nome válido (apenas letras).", "error");
             return;
         }
         adicionarAmigo(nomeAmigo);
-    }
+    };
 
-    function mostrarFeedback(mensagem, tipo) {
+    // Função para mostrar feedback ao usuário
+    const mostrarFeedback = (mensagem, tipo) => {
         feedbackMessage.textContent = mensagem;
         feedbackMessage.className = tipo === "success" ? "feedback-success" : "feedback-error";
         setTimeout(() => feedbackMessage.textContent = "", 3000);
-    }
+    };
 
+    // Função para falar texto usando a API de Síntese de Fala
+    const speak = (text) => {
+        const utterance = new SpeechSynthesisUtterance(text);
+        speechSynthesis.speak(utterance);
+    };
+
+    // Adicionar evento ao botão de adicionar
     btnAdicionarAmigo.addEventListener("click", adicionarNomeAmigo);
 
-    inputAmigo.addEventListener("keypress", function (event) {
+    // Adicionar evento ao pressionar Enter no campo de entrada
+    inputAmigo.addEventListener("keypress", (event) => {
         if (event.key === "Enter") {
             adicionarNomeAmigo();
         }
     });
 
-    btnSortearAmigo.addEventListener("click", function () {
+    // Adicionar evento ao botão de sortear
+    btnSortearAmigo.addEventListener("click", () => {
         if (listaAmigos.length === 0) {
             mostrarFeedback("Adicione amigos antes de realizar o sorteio.", "error");
             return;
